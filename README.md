@@ -1,32 +1,32 @@
- # Visão Geral
+ # Sistema de Biblioteca — Empréstimo de Livros
+### Domain-Driven Design (DDD Leve)
+## Visão Geral
 
- Este projeto implementa um Sistema de Gerenciamento de Empréstimos de Livros, desenvolvido em Python (≥ 3.13), utilizando os princípios de Domain-Driven Design (DDD Leve).
+Este projeto implementa um Sistema de Gerenciamento de Empréstimos de Livros, desenvolvido em Python (≥ 3.13), utilizando os princípios de Domain-Driven Design (DDD Leve).
 
- O sistema controla livros, usuários e empréstimos, garantindo consistência, validações e regras de negócio puras, com dados mantidos em memória.
+O sistema controla livros, usuários e empréstimos, garantindo consistência, validações e regras de negócio puras, com dados mantidos exclusivamente em memória.
 
- O foco principal do trabalho é a arquitetura, a separação de responsabilidades e a qualidade dos testes, conforme especificação da disciplina.
+O foco principal do trabalho é a arquitetura, a separação de responsabilidades e a qualidade dos testes, conforme a especificação da disciplina.
 
-## O sistema permite:
+        ✅ Funcionalidades do Sistema
 
-📖 Cadastro de livros
+        📖 Cadastro de livros
 
-👤 Cadastro de usuários
+        👤 Cadastro de usuários
 
-🔄 Empréstimos e devoluções
+        🔄 Empréstimos e devoluções
 
-       🤝 Respeitando rigorosamente as regras de negócio:
+        🤝 Regras de Negócio Respeitadas
 
-🚫 Um livro não pode ser emprestado se já estiver emprestado
+        🚫 Um livro não pode ser emprestado se já estiver emprestado
 
-🔢 Um usuário não pode ultrapassar o limite de empréstimos simultâneos
+        🔢 Um usuário não pode ultrapassar o limite de empréstimos simultâneos
 
-📅 Datas de empréstimo e devolução devem ser válidas
+        📅 Datas de empréstimo e devolução devem ser válidas
 
-🔁 Controle completo do ciclo de vida do empréstimo
+        🔁 Controle completo do ciclo de vida do empréstimo
 
-### O foco do projeto está na organização arquitetural, separação de responsabilidades, regras de negócio puras e testes abrangentes, conforme especificado na disciplina.
-
-        🎯 Objetivo do Trabalho
+🎯 Objetivo do Trabalho
 
 1. Aplicar os conceitos de DDD Leve na prática
 
@@ -50,35 +50,42 @@
 
         🧪 Testes End-to-End (E2E)
 
-
-
-
-# Regras de Negócio do Sistema de Biblioteca
+## Regras de Negócio do Sistema de Biblioteca
 1️⃣ Regras Gerais
 
-        Todas as regras estão exclusivamente no Domínio.
+- Todas as regras estão exclusivamente no Domínio
 
-        Nenhuma regra acessa input, print, arquivos ou banco.
+Nenhuma regra acessa:
 
-        Violações geram exceções de domínio com mensagens em PT-BR.
+input
+
+print
+
+arquivos
+
+banco de dados
+
+Violações geram exceções de domínio, com mensagens em PT-BR
 
 2️⃣ Regras de Livro
     
-1. Cadastro
+1.  Cadastro
 
-    Um livro deve possuir:
+Um livro deve possuir:
 
-      -  ID único
+        ID único
 
-      -  Título
+        Título
 
-      -  Autor
+        Autor
 
-      -  Não é permitido cadastrar livros com IDs duplicados.
+2. Regras:
 
-      -  Todo livro inicia como disponível.
+        ❌ Não é permitido cadastrar livros com IDs duplicados
 
-📕 Estado
+        ✅ Todo livro inicia como disponível
+
+📕 Estado do Livro
 
 Um livro pode estar em apenas um estado:
 
@@ -86,11 +93,14 @@ Um livro pode estar em apenas um estado:
 
 2. Emprestado
 
-        Livro emprestado não pode ser emprestado novamente.
+Regras:
 
-        Um livro só volta a ficar disponível após devolução válida.
+- Livro emprestado não pode ser emprestado novamente
+
+- O livro só volta a ficar disponível após devolução válida
 
 3️⃣ Regras de Usuário
+
 👤 Cadastro
 
 Um usuário deve possuir:
@@ -99,17 +109,19 @@ Um usuário deve possuir:
 
         Nome
 
-        Não é permitido cadastrar usuários com IDs duplicados.
+Regras:
 
-📚 Limite de Empréstimos
+- Não é permitido cadastrar usuários com IDs duplicados
 
-        Um usuário pode ter no máximo 3 empréstimos ativos simultâneos.
+- Limite de Empréstimos:
 
-        Se atingir o limite, novos empréstimos são bloqueados.
+        - Um usuário pode ter no máximo 7 empréstimos ativos simultâneos
+
+- Ao atingir o limite, novos empréstimos são bloqueados
 
 4️⃣ Regras de Empréstimo
 
-1. Criação
+🔹 Criação
 
 Um empréstimo deve conter:
 
@@ -121,51 +133,57 @@ Um empréstimo deve conter:
 
         Data prevista de devolução
 
-        A data de devolução prevista deve ser posterior à data do empréstimo.
+Regras:
+
+- A data prevista de devolução deve ser posterior à data do empréstimo
 
 Não é permitido criar empréstimo para:
 
-        Livro inexistente
+- Livro inexistente
 
-        Usuário inexistente
+- Usuário inexistente
 
 O empréstimo só ocorre se:
 
-        O livro estiver disponível
+- O livro estiver disponível
 
-        O usuário não tiver atingido o limite
+- O usuário não tiver atingido o limite
+
+- Usuário não tiver com devolução atrasada
 
 🔒 Exclusividade
 
-        Um livro pode ter apenas um empréstimo ativo.
+- Um livro pode ter apenas um empréstimo ativo
 
-        Empréstimo ativo é aquele sem data de devolução real.
+- Empréstimo ativo é aquele sem data de devolução real
 
 5️⃣ Regras de Devolução
 
 A devolução deve registrar:
 
-        Data real de devolução
+- Data real de devolução
 
-A data de devolução real:
+Regras:
 
-        Não pode ser anterior à data do empréstimo
+- A data de devolução real não pode ser anterior à data do empréstimo
 
-Após devolução:
+Após a devolução:
 
-        O empréstimo deixa de ser ativo
+- O empréstimo deixa de ser ativo
 
-        O livro volta a ficar disponível
+- O livro volta a ficar disponível
+
+- A quantidade de cópias daquele livro aumenta +1
 
 6️⃣ Regras de Consistência
 
-Não é permitido:
+❌ Não é permitido:
 
         Devolver livro não emprestado
 
         Devolver o mesmo empréstimo duas vezes
 
-Consistência obrigatória:
+✅ Consistência obrigatória:
 
         Livro emprestado ⇒ existe empréstimo ativo
 
@@ -175,17 +193,17 @@ Consistência obrigatória:
 
 O sistema permite:
 
-        Listar livros disponíveis
+- Listar livros disponíveis
 
-        Listar livros emprestados
+- Listar livros emprestados
 
-        Listar empréstimos ativos por usuário
+- Listar empréstimos ativos por usuário
 
-        Consultas não alteram o estado do sistema.
+📌 Consultas não alteram o estado do sistema
 
 8️⃣ Regras de Erro
-    
-Toda violação gera exceção específica:
+
+Toda violação gera uma exceção específica de domínio, como:
 
         LivroIndisponivelError
 
@@ -193,23 +211,7 @@ Toda violação gera exceção específica:
 
         DataInvalidaError
 
-        Mensagens devem ser claras e amigáveis.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# As mensagens devem ser claras, objetivas e amigáveis
 
 
 
