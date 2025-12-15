@@ -14,7 +14,7 @@
 
 🔄 Empréstimos e devoluções
 
-        Respeitando rigorosamente as regras de negócio:
+       🤝 Respeitando rigorosamente as regras de negócio:
 
 🚫 Um livro não pode ser emprestado se já estiver emprestado
 
