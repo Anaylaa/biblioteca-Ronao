@@ -1,17 +1,34 @@
-# biblioteca-Ronao
-Sistema de Agendamento — Projeto com DDD Leve
-1. Descrição Geral
+📚 Sistema de Biblioteca — Empréstimo de Livros (DDD Leve)
+📌 Visão Geral
 
-Este projeto implementa um sistema de agendamento/gerenciamento usando Python e a arquitetura DDD Leve, separando o código em camadas independentes:
+Este projeto implementa um Sistema de Gerenciamento de Empréstimos de Livros, desenvolvido em Python, aplicando os princípios de Domain-Driven Design (DDD) Leve.
 
-Domínio: regras de negócio puras
+O sistema permite cadastrar livros e usuários, realizar empréstimos e devoluções, garantindo regras de negócio como:
 
-Infraestrutura: repositórios em memória
+Um livro não pode ser emprestado se já estiver emprestado;
 
-Aplicação (Fachada): orquestração e validações
+Um usuário não pode ultrapassar o limite de empréstimos simultâneos;
 
-Interface (CLI): interação com o usuário via terminal
+Datas de empréstimo e devolução devem ser válidas;
 
-2. Domínio Escolhido
+Controle total do ciclo de vida do empréstimo.
 
-Biblioteca: Gerenciar empréstimos de livros para usuários. 
+O foco do projeto está na organização arquitetural, separação de responsabilidades, regras de negócio puras e testes abrangentes, conforme especificado na disciplina.
+
+🎯 Objetivo do Trabalho
+
+Aplicar DDD Leve na prática
+
+Separar claramente:
+
+Domínio
+
+Infraestrutura
+
+Aplicação
+
+Interface do Usuário
+
+Desenvolver um sistema funcional com dados em memória
+
+Criar uma suíte completa de testes unitários, integração e E2E
