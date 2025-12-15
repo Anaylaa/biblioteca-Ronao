@@ -1,4 +1,4 @@
- # Sistema de Biblioteca — Empréstimo de Livros
+# Sistema de Biblioteca — Empréstimo de Livros
 ### Domain-Driven Design (DDD Leve)
 ## Visão Geral
 
@@ -214,7 +214,26 @@ Toda violação gera uma exceção específica de domínio, como:
 # As mensagens devem ser claras, objetivas e amigáveis
 
 
+## Estrutura do Projeto
+
+📂 **biblioteca-ddd/** — Root do projeto
+        ├── 📄 README.md — Documentação do projeto
+        ├── 📄 pyproject.toml — Dependências e configuração Python
+        ├── 📄 pytest.ini — Configuração dos testes
+        ├── 📄 .gitignore — Arquivos ignorados pelo Git
+        ├── 📂 src/ — Código-fonte principal
+        │   ├── 🧠 domain/ — Regras de negócio, entidades e exceções
+        │   ├── ⚙️ application/ — Casos de uso
+        │   ├── 🏗️ infrastructure/ — Implementações técnicas (memória, clock)
+        │   ├── 🖥️ interface/ — CLI ou UI do usuário
+        │   └── 📄 main.py — Ponto de entrada do sistema
+        └── 📂 tests/ — Testes automatizados
+            ├── 🔹 unit/ — Testes unitários
+            ├── 🔹 integration/ — Testes de integração
+            └── 🔹 e2e/ — Testes end-to-end
 
 
 
- 
+
+
+
