@@ -1,34 +1,47 @@
-📚 Sistema de Biblioteca — Empréstimo de Livros (DDD Leve)
-📌 Visão Geral
+ # Visão Geral
 
-Este projeto implementa um Sistema de Gerenciamento de Empréstimos de Livros, desenvolvido em Python, aplicando os princípios de Domain-Driven Design (DDD) Leve.
+### Este projeto implementa um Sistema de Gerenciamento de Empréstimos de Livros, desenvolvido em Python, aplicando os princípios de Domain-Driven Design (DDD) Leve.
 
-O sistema permite cadastrar livros e usuários, realizar empréstimos e devoluções, garantindo regras de negócio como:
+## O sistema permite:
 
-Um livro não pode ser emprestado se já estiver emprestado;
+📖 Cadastro de livros
 
-Um usuário não pode ultrapassar o limite de empréstimos simultâneos;
+👤 Cadastro de usuários
 
-Datas de empréstimo e devolução devem ser válidas;
+🔄 Empréstimos e devoluções
 
-Controle total do ciclo de vida do empréstimo.
+        Respeitando rigorosamente as regras de negócio:
 
-O foco do projeto está na organização arquitetural, separação de responsabilidades, regras de negócio puras e testes abrangentes, conforme especificado na disciplina.
+❌ Um livro não pode ser emprestado se já estiver emprestado
 
-🎯 Objetivo do Trabalho
+🔢 Um usuário não pode ultrapassar o limite de empréstimos simultâneos
 
-Aplicar DDD Leve na prática
+📅 Datas de empréstimo e devolução devem ser válidas
 
-Separar claramente:
+🔁 Controle completo do ciclo de vida do empréstimo
 
-Domínio
+### O foco do projeto está na organização arquitetural, separação de responsabilidades, regras de negócio puras e testes abrangentes, conforme especificado na disciplina.
 
-Infraestrutura
+        🎯 Objetivo do Trabalho
 
-Aplicação
+1. Aplicar os conceitos de DDD Leve na prática
 
-Interface do Usuário
+2. Separar claramente as camadas do sistema:
 
-Desenvolver um sistema funcional com dados em memória
+        🧠 Domínio
 
-Criar uma suíte completa de testes unitários, integração e E2E
+        ⚙️ Aplicação
+
+        🏗️ Infraestrutura
+
+        🖥️ Interface do Usuário
+
+3. Desenvolver um sistema funcional com dados em memória
+
+4. Criar uma suíte completa de testes:
+
+        ✅ Testes Unitários
+
+        🔗 Testes de Integração
+
+        🧪 Testes End-to-End (E2E)
