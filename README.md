@@ -1,6 +1,10 @@
  # Visão Geral
 
-### Este projeto implementa um Sistema de Gerenciamento de Empréstimos de Livros, desenvolvido em Python, aplicando os princípios de Domain-Driven Design (DDD) Leve.
+### Este projeto implementa um Sistema de Gerenciamento de Empréstimos de Livros, desenvolvido em Python (≥ 3.13), utilizando os princípios de Domain-Driven Design (DDD Leve).
+
+### O sistema controla livros, usuários e empréstimos, garantindo consistência, validações e regras de negócio puras, com dados mantidos em memória.
+
+### O foco principal do trabalho é a arquitetura, a separação de responsabilidades e a qualidade dos testes, conforme especificação da disciplina.
 
 ## O sistema permite:
 
@@ -12,7 +16,7 @@
 
         Respeitando rigorosamente as regras de negócio:
 
-❌ Um livro não pode ser emprestado se já estiver emprestado
+🚫 Um livro não pode ser emprestado se já estiver emprestado
 
 🔢 Um usuário não pode ultrapassar o limite de empréstimos simultâneos
 
