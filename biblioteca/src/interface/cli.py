@@ -1,0 +1,10 @@
+def menu():
+    print("\n=== Biblioteca ===")
+    print("1. Listar livros disponíveis")
+    print("2. Alugar livro")
+    print("3. Devolver livro")
+    print("4. Listar quais livros eu aluguei")
+    print("5. Renovar Empréstimo")
+    print("6. Ver quantos dias faltam para cada livro")    
+    print("0. Sair")
+    return input("Escolha uma opção: ")
