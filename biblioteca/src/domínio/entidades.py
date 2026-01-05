@@ -2,17 +2,18 @@ from datetime import datetime
 from domain.excecoes import LivroIndisponivel, EmprestimoJaDevolvido
 
 class Usuario:
-    def __init__(self, id: int, nome: str, email: str):
+    def __init__(self, id: int, email: str):
         self.id = id
-        self.nome = nome
         self.email = email
 
 class Livro:
-    def __init__(self, id: int, titulo: str, autor: str):
+    def __init__(self, id: int, titulo: str, autor: str, categoria: str, qtdeExemplares: int ):
         self.id = id
         self.titulo = titulo
         self.autor = autor
+        self.categoria = categoria
         self.disponivel = True
+        self.qtdeExemplares = qtdeExemplares
 
 class Emprestimo:
     def __init__(self, id: int, usuario: Usuario, livro: Livro):
