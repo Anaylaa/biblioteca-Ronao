@@ -1,0 +1,40 @@
+from biblioteca.src.domain.entidades import Usuario, Livro
+from biblioteca.src.infrastructure.repositorios_memoria import (
+    RepositorioUsuariosMemoria,
+    RepositorioLivrosMemoria,
+    RepositorioEmprestimosMemoria
+)
+from biblioteca.src.application.biblioteca_service import BibliotecaService
+from biblioteca.src.domain.excecoes import LivroIndisponivelError
+
+def test_fluxo_completo():
+    repo_usuarios = RepositorioUsuariosMemoria()
+    repo_livros = RepositorioLivrosMemoria()
+    repo_emprestimos = RepositorioEmprestimosMemoria()
+    service = BibliotecaService(repo_usuarios, repo_livros, repo_emprestimos)
+
+    # Criar usuários
+    u1 = Usuario(None, "Alice")
+    u2 = Usuario(None, "Bob")
+    repo_usuarios.adicionar(u1)
+    repo_usuarios.adicionar(u2)
+
+    # Criar livro
+    l1 = Livro(None, "Python 101", "Autor", 1)
+    repo_livros.adicionar(l1)
+
+    # Alice pega o livro
+    e1 = service.emprestar_livro(u1.id, l1.id)
+
+    # Bob não consegue pegar o mesmo livro
+    try:
+        service.emprestar_livro(u2.id, l1.id)
+        assert False, "Deveria lançar LivroIndisponivelError"
+    except LivroIndisponivelError:
+        pass
+
+    # Alice devolve e Bob pega
+    service.devolver_livro(e1.id)
+    e2 = service.emprestar_livro(u2.id, l1.id)
+    assert e2.usuario == u2
+    assert l1.qtdeExemplares == 0

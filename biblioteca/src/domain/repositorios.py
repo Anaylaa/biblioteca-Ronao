@@ -7,6 +7,10 @@ class RepositorioUsuarios(ABC):
     @abstractmethod
     def listar_todos(self): pass
 
+    @abstractmethod
+    def buscar_por_id(self, id): pass
+
+
 class RepositorioLivros(ABC):
     @abstractmethod
     def adicionar(self, livro): pass
@@ -14,9 +18,16 @@ class RepositorioLivros(ABC):
     @abstractmethod
     def listar_todos(self): pass
 
+    @abstractmethod
+    def buscar_por_id(self, id): pass
+
+
 class RepositorioEmprestimos(ABC):
     @abstractmethod
     def adicionar(self, emprestimo): pass
 
     @abstractmethod
     def listar_todos(self): pass
+
+    @abstractmethod
+    def buscar_por_id(self, id): pass

@@ -1,0 +1,13 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "biblioteca"
+version = "0.1.1"
+
+[tool.hatch.build.targets.wheel]
+packages = ["biblioteca/src"]
+
+[pytest]
+pythonpath = ["biblioteca/src"]
