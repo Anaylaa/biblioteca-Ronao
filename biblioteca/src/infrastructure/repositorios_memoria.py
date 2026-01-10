@@ -1,4 +1,5 @@
 from src.domain.repositorios import (
+    RepositorioReservas,
     RepositorioUsuarios,
     RepositorioLivros,
     RepositorioEmprestimos
@@ -54,3 +55,10 @@ class RepositorioEmprestimosMemoria(RepositorioBaseMemoria, RepositorioEmprestim
         emprestimo.id = self._gerar_id()
         self._dados.append(emprestimo)
         return emprestimo
+
+
+# ===================== RESERVAS =====================
+class RepositorioReservasMemoria(RepositorioBaseMemoria, RepositorioReservas):
+    def adicionar(self, reserva):
+        self._dados.append(reserva)
+        return reserva

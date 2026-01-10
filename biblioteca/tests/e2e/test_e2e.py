@@ -1,3 +1,4 @@
+import pytest
 from src.domain.entidades import Usuario, Livro
 from src.infrastructure.repositorios_memoria import (
     RepositorioUsuariosMemoria,
@@ -7,11 +8,17 @@ from src.infrastructure.repositorios_memoria import (
 from src.application.biblioteca_service import BibliotecaService
 from src.domain.excecoes import LivroIndisponivelError
 
+
 def test_fluxo_completo():
     repo_usuarios = RepositorioUsuariosMemoria()
     repo_livros = RepositorioLivrosMemoria()
     repo_emprestimos = RepositorioEmprestimosMemoria()
-    service = BibliotecaService(repo_usuarios, repo_livros, repo_emprestimos)
+
+    service = BibliotecaService(
+        repo_usuarios,
+        repo_livros,
+        repo_emprestimos
+    )
 
     # Criar usuários
     u1 = Usuario(None, "Alice")
@@ -19,22 +26,23 @@ def test_fluxo_completo():
     repo_usuarios.adicionar(u1)
     repo_usuarios.adicionar(u2)
 
-    # Criar livro
-    l1 = Livro(None, "Python 101", "Autor", "Programação",  1)
+    # Criar livro com apenas 1 exemplar
+    l1 = Livro(None, "Python 101", "Autor", "Programação", 1)
     repo_livros.adicionar(l1)
 
     # Alice pega o livro
     e1 = service.emprestar_livro(u1.id, l1.id)
+    assert l1.qtdeExemplares == 0
 
-    # Bob não consegue pegar o mesmo livro
-    try:
+    # Bob NÃO consegue pegar
+    with pytest.raises(LivroIndisponivelError):
         service.emprestar_livro(u2.id, l1.id)
-        assert False, "Deveria lançar LivroIndisponivelError"
-    except LivroIndisponivelError:
-        pass
 
-    # Alice devolve e Bob pega
+    # Alice devolve
     service.devolver_livro(e1.id)
+    assert l1.qtdeExemplares == 1
+
+    # Bob agora consegue pegar
     e2 = service.emprestar_livro(u2.id, l1.id)
     assert e2.usuario == u2
     assert l1.qtdeExemplares == 0

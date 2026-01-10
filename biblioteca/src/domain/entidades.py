@@ -36,6 +36,11 @@ class Usuario:
     def remover_emprestimo(self, emprestimo):
         self._emprestimos.remove(emprestimo)
 
+    def esta_bloqueado(self):
+        for e in self.emprestimos_ativos():
+            if e.esta_atrasado():
+                return True
+        return False
 
 class Livro:
     def __init__(self, id: int, titulo: str, autor: str, categoria: str, qtdeExemplares: int):
@@ -107,3 +112,18 @@ class Emprestimo:
             return 0
         delta = self.data_prevista_devolucao - datetime.now()
         return max(delta.days, 0)
+
+    def dias_em_atraso(self):
+        if not self.esta_atrasado():
+            return 0
+        return (datetime.now() - self.data_prevista_devolucao).days
+
+
+
+class Reserva:
+    def __init__(self, usuario, livro, data):
+        self.usuario = usuario
+        self.livro = livro
+        self.data = data
+    def esta_valida(self):
+        return datetime.now() <= self.data + timedelta(days=3)
