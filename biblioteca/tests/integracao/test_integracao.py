@@ -2,14 +2,14 @@ import pytest
 from datetime import timedelta
 
 # Entidades do domínio
-from biblioteca.src.domain.entidades import Usuario, Livro, Emprestimo
-from biblioteca.src.domain.excecoes import LivroIndisponivelError, EmprestimoJaDevolvidoError
-from biblioteca.src.infrastructure.repositorios_memoria import (
+from src.domain.entidades import Usuario, Livro, Emprestimo
+from src.domain.excecoes import LivroIndisponivelError, EmprestimoJaDevolvidoError
+from src.infrastructure.repositorios_memoria import (
     RepositorioUsuariosMemoria,
     RepositorioLivrosMemoria,
     RepositorioEmprestimosMemoria
 )
-from biblioteca.src.application.biblioteca_service import BibliotecaService
+from src.application.biblioteca_service import BibliotecaService
 
 @pytest.fixture
 def setup_biblioteca():
@@ -21,7 +21,7 @@ def setup_biblioteca():
     usuario = Usuario(None, "Alice")
     repo_usuarios.adicionar(usuario)
     
-    livro = Livro(None, "Python 101", "Autor", "Programação", qtdeExemplares=2)
+    livro = Livro(None, "Python 101", "Autor", "Programação", 2)
     repo_livros.adicionar(livro)
 
     return service, usuario, livro

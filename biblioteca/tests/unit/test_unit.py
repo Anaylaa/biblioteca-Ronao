@@ -1,12 +1,12 @@
 import pytest
-from biblioteca.src.domain.entidades import Usuario, Livro
-from biblioteca.src.infrastructure.repositorios_memoria import (
+from src.domain.entidades import Usuario, Livro
+from src.infrastructure.repositorios_memoria import (
     RepositorioUsuariosMemoria,
     RepositorioLivrosMemoria,
     RepositorioEmprestimosMemoria
 )
-from biblioteca.src.application.biblioteca_service import BibliotecaService
-from biblioteca.src.domain.excecoes import (
+from src.application.biblioteca_service import BibliotecaService
+from src.domain.excecoes import (
     LivroIndisponivelError,
     LimiteEmprestimosExcedidoError,
     EmprestimoJaDevolvidoError
@@ -22,7 +22,7 @@ def setup_biblioteca():
     usuario = Usuario(None, "Alice")
     repo_usuarios.adicionar(usuario)
 
-    livro = Livro(None, "Python 101", "Autor", 2)
+    livro = Livro(None, "Python 101", "Autor","Programação", 2)
     repo_livros.adicionar(livro)
 
     return service, usuario, livro
@@ -49,13 +49,14 @@ def test_renovar_emprestimo(setup_biblioteca):
 
 def test_limite_emprestimos(setup_biblioteca):
     service, usuario, livro = setup_biblioteca
-    for _ in range(7):
-        l = Livro(None, f"Livro {_}", "Autor", 1)
+
+    for i in range(7):
+        l = Livro(None, f"Livro {i}", "Autor", "Programação", 1)
         service.repo_livros.adicionar(l)
         service.emprestar_livro(usuario.id, l.id)
 
-    # 8º empréstimo deve falhar
-    l_extra = Livro(None, "Extra", "Autor", 1)
+    l_extra = Livro(None, "Extra", "Autor", "Programação", 1)
     service.repo_livros.adicionar(l_extra)
+
     with pytest.raises(LimiteEmprestimosExcedidoError):
         service.emprestar_livro(usuario.id, l_extra.id)

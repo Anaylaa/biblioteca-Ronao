@@ -1,11 +1,11 @@
-from biblioteca.src.domain.entidades import Usuario, Livro
-from biblioteca.src.infrastructure.repositorios_memoria import (
+from src.domain.entidades import Usuario, Livro
+from src.infrastructure.repositorios_memoria import (
     RepositorioUsuariosMemoria,
     RepositorioLivrosMemoria,
     RepositorioEmprestimosMemoria
 )
-from biblioteca.src.application.biblioteca_service import BibliotecaService
-from biblioteca.src.domain.excecoes import LivroIndisponivelError
+from src.application.biblioteca_service import BibliotecaService
+from src.domain.excecoes import LivroIndisponivelError
 
 def test_fluxo_completo():
     repo_usuarios = RepositorioUsuariosMemoria()
@@ -20,7 +20,7 @@ def test_fluxo_completo():
     repo_usuarios.adicionar(u2)
 
     # Criar livro
-    l1 = Livro(None, "Python 101", "Autor", 1)
+    l1 = Livro(None, "Python 101", "Autor", "Programação",  1)
     repo_livros.adicionar(l1)
 
     # Alice pega o livro
